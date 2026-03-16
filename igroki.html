@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-blue: #00a0e3;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --border-color: #eaeaea;
+            --bg-light: #f5f7f9;
+            --win-green: #27ae60;
+            --loss-red: #e74c3c;
+            --text-main: #001a47; 
+            --text-muted: #6b7a90; 
+            --accent-blue: #009ae5;
+            --border-radius: 12px;
+            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: #ffffff;
+            color: #000;
+            margin: 0;
+            margin-top: 0px;
+            padding: 0;
+            cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b239d7aeb290a31ac5_cursor-default%402x.svg") 2 0, auto;
+        }
+        a, button, .dropdown, .btn-action, .watch-link, .header__button {
+    cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b212e6b71494aa67ff_cursor-pointer%402x.svg") 12 0, pointer;
+}
+
+        /* Общий контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Шапка сайта --- */
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .header__nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+
+        .header__list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+
+        /* --- Хлебные крошки --- */
+        .breadcrumbs {
+            font-size: 12px;
+            color: #888888;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        /* Очищенные и правильные стили для таблицы */
+        .main {
+            background-color: white;
+            padding: 1em;
+            border-radius: 15px;
+            max-width: 974px;
+            margin: 2em auto;
+        }
+
+        .currentplaying {
+            display: flex;
+            align-items: center;
+            margin: 1em 1em 2em 1em;
+        }
+
+        .spotify {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .heading {
+            color: black;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-left: 15px;
+            margin-bottom: 0;
+        }
+
+        .loader {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            height: 4em;
+            padding: 0 1em;
+            border-radius: 10px;
+            transition: .4s ease-in-out;
+        }
+
+        .loader:hover {
+            cursor: pointer;
+            background-color: #f2f5fa;
+        }
+
+        .albumcover {
+            position: relative;
+            height: 40px;
+            width: 40px;
+            background-color: rgb(233, 232, 232);
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+
+        .song {
+            margin-left: 1.5em;
+            text-align: left;
+            color: black;
+        }
+
+        .name {
+            font-weight: bold;
+            color: black;
+            margin: 0 0 4px 0;
+            font-size: 1.1em;
+        }
+
+        .artist {
+            font-size: 0.8em;
+            color: #808080;
+            margin: 0;
+        }
+    </style>
+<body>
+
+    <header class="header">
+        <div class="header__container">
+            <nav class="header__nav">
+                <a href="index.html"><img src="images/logo2.svg" alt="Зенит" width="100"></a>
+                <ul class="header__list">
+                    <li class="header__list-item"><a href="index.html" class="nav-link">Главная</a></li>
+                    <li class="header__list-item"><a href="raspisanie.html" class="nav-link">Матчи</a></li>
+                    <li class="header__list-item"><a href="TAbl.html" class="nav-link">Турнирная таблица</a></li>
+                    <li class="header__list-item"><a href="igroki.html" class="nav-link">Игроки</a></li>
+                </ul>
+                <a href="registration.html" class="header__button">Регистрация</a>
+            </nav>
+        </div>
+    </header>
+    <main class="main">
+        <h1 class="heading">Основной состав</h1>
+        
+        <table class="players-table">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Игрок</th>
+                    <th>Амплуа</th>
+                    <th>Гражданство</th>
+                    <th>Возраст</th>
+                </tr>
+            </thead>
+<tbody>
+                <tr>
+                    <td>16</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/Den Adamov.png" alt="Денис Адамов">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Денис Адамов</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Вратарь</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>28</td>
+                </tr>
+                
+                <tr>
+                    <td>41</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/KERZHXAK.png" alt="Кержаков">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Михаил Кержаков</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Вратарь</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>39</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/DOUGLAS SANTOS.png" alt="Дуглас Сантос">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Дуглас Сантос</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник (Капитан)</td>
+                    <td><img src="images/BRA.png" alt=""> Бразилия</td>
+                    <td>31</td>
+                </tr>
+
+                                <tr>
+                    <td>4</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/Пщкырлщм.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Юрий Горшков</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>27</td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/DRYSHICH.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Ваня Дркушич</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник</td>
+                    <td><img src="images/SLOV.png" alt=""> Сербия</td>
+                    <td>26</td>
+                </tr>
+
+                    <tr>
+                    <td>15</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/KARAVAEV.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Вячеслав Караваев</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>30</td>
+                </tr>
+
+                    <tr>
+                    <td>23</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/ADAMOV.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Арсен Адамов</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>26</td>
+                </tr>
+
+                    <tr>
+                    <td>28</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/ALIP.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Нуралы Алип</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник</td>
+                    <td><img src="images/KAZ.png" alt=""> Казахстан</td>
+                    <td>26</td>
+                </tr>
+
+                    <tr>
+                    <td>33</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/NINO.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Нино</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник</td>
+                    <td><img src="images/BRA.png" alt=""> Бразилия</td>
+                    <td>28</td>
+                </tr>
+
+                    <tr>
+                    <td>66</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/VEGA.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Роман Вега</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник</td>
+                    <td><img src="images/ARG.png" alt=""> Аргентина</td>
+                    <td>22</td>
+                </tr>
+
+                    <tr>
+                    <td>78</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/IGOR.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Игорь Дивеев</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Защитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>26</td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/VENDELL.png" alt="Вендел">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Вендел</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/BRA.png" alt=""> Бразилия</td>
+                    <td>28</td>
+                </tr>
+
+                    <tr>
+                    <td>5</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/BARRIOS.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Вильмар Барриос</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/Kol.png" alt=""> Колумбия</td>
+                    <td>32</td>
+                </tr>
+
+                    <tr>
+                    <td>10</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/MAKSIM.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Максим Глушенков</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>26</td>
+                </tr>
+                
+                <tr>
+                <td>11</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/LUIS ENRIKE.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Луис Энрике</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/BRA.png" alt=""> Бразилия</td>
+                    <td>25</td>
+                </tr>
+
+                <tr>
+                <td>14</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/JOHN.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Джон Джон</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/BRA.png" alt=""> Бразилия</td>
+                    <td>23</td>
+                </tr>
+
+                    <tr>
+                    <td>17</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/Mostovoy.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Андрей Мостовой</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>28</td>
+                </tr>
+                
+                    <tr>
+                    <td>18</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/Yaros.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Ярослав Михайлов</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>22</td>
+                </tr>
+
+                                
+                    <tr>
+                    <td>21</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/Erokhin.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Александр Ерохин</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>36</td>
+                </tr>
+
+                                
+                    <tr>
+                    <td>31</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/GUSTAVO.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Густаво Мантуан</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/BRA.png" alt=""> Бразилия</td>
+                    <td>24</td>
+                </tr>
+
+                                
+                    <tr>
+                    <td>61</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/KONDAKOV.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Даниил Кондаков</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Полузащитник</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>18</td>
+                </tr>
+
+                                
+                    <tr>
+                    <td>7</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/SOBOLEV.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Александр Соболев</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Нападающий</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>29</td>
+                </tr>
+
+                                
+                    <tr>
+                    <td>18</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/DURAN.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Джон Дуран</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Нападающий</td>
+                    <td><img src="images/Kol.png" alt=""> Колумбия</td>
+                    <td>22</td>
+                </tr>
+
+                                
+                    <tr>
+                    <td>20</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/PEDRO.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Педро</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Нападающий</td>
+                    <td><img src="images/BRA.png" alt=""> Бразилия</td>
+                    <td>20</td>
+                </tr>
+
+                                
+                    <tr>
+                    <td>51</td>
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container">
+                                <img src="images/Shilov.png" alt="">
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">Вадим Шилов</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Нападающий</td>
+                    <td><img src="images/RUS.png" alt=""> Россия</td>
+                    <td>17</td>
+                </tr>
+
+            </tbody>
+        </table>
+<!-- From Uiverse.io by Praashoo7 --> 
+  <div class="down">
+<!-- From Uiverse.io by vinodjangid07 --> 
+<button class="Btn" onclick="window.location.href='https://github.com/highBobIK'">
+ <span class="svgContainer">
+   <svg fill="white" viewBox="0 0 496 512" height="1.6em"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+ </span>
+ <span class="BG"></span>
+</button>
+<button class="Btn">
+    <button class="Btn" onclick="window.location.href='https://t.me/Ah322Vpp'">
+  <span class="svgContainer">
+    <svg
+      viewBox="0 0 496 512"
+      height="1.6em"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="white"
+    >
+      <path
+        d="M248 8C111 8 0 119 0 256S111 504 248 504 496 393 496 256 385 8 248 8zM363 176.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7 .2-.7 .3-3.1-1.2-4.4s-3.6-.8-5.1-.5q-3.3 .7-104.6 69.1-14.8 10.2-26.9 9.9c-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3q.8-6.7 18.5-13.7 108.4-47.2 144.6-62.3c68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6 .5 9.6 2.9a10.5 10.5 0 0 1 3.5 6.7A43.8 43.8 0 0 1 363 176.7z"
+        fill="white"
+      ></path>
+    </svg>
+  </span>
+  <span class="BG"></span>
+</button>
+
+  </div>
+</div>
+    </main>
+
+</html>

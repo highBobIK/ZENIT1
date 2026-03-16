@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-blue: #00a0e3;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --border-color: #eaeaea;
+            --bg-light: #f5f7f9;
+            --win-green: #27ae60;
+            --loss-red: #e74c3c;
+            --text-main: #001a47; 
+            --text-muted: #6b7a90; 
+            --accent-blue: #009ae5;
+            --border-radius: 12px;
+            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: #ffffff;
+            color: #000;
+            margin: 0;
+            margin-top: 0px;
+            padding: 0;
+            cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b239d7aeb290a31ac5_cursor-default%402x.svg") 2 0, auto;
+        }
+        a, button, .dropdown, .btn-action, .watch-link, .header__button {
+    cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b212e6b71494aa67ff_cursor-pointer%402x.svg") 12 0, pointer;
+}
+
+        /* Общий контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Шапка сайта --- */
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .header__nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+
+        .header__list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+
+        /* --- Хлебные крошки --- */
+        .breadcrumbs {
+            font-size: 12px;
+            color: #888888;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        /* Очищенные и правильные стили для таблицы */
+        .main {
+            background-color: white;
+            padding: 1em;
+            border-radius: 15px;
+            max-width: 974px;
+            margin: 2em auto;
+        }
+
+        .currentplaying {
+            display: flex;
+            align-items: center;
+            margin: 1em 1em 2em 1em;
+        }
+
+        .spotify {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .heading {
+            color: black;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-left: 15px;
+            margin-bottom: 0;
+        }
+
+        .loader {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            height: 4em;
+            padding: 0 1em;
+            border-radius: 10px;
+            transition: .4s ease-in-out;
+        }
+
+        .loader:hover {
+            cursor: pointer;
+            background-color: #f2f5fa;
+        }
+
+        .albumcover {
+            position: relative;
+            height: 40px;
+            width: 40px;
+            background-color: rgb(233, 232, 232);
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+
+        .song {
+            margin-left: 1.5em;
+            text-align: left;
+            color: black;
+        }
+
+        .name {
+            font-weight: bold;
+            color: black;
+            margin: 0 0 4px 0;
+            font-size: 1.1em;
+        }
+
+        .artist {
+            font-size: 0.8em;
+            color: #808080;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header__container">
+        <nav class="header__nav">
+            <a href="index.html"><img src="images/logo2.svg" alt="Зенит" width="100"></a>
+            <ul class="header__list">
+                <li class="header__list-item"><a href="index.html" class="nav-link">Главная</a></li>
+                <li class="header__list-item"><a href="raspisanie.html" class="nav-link">Матчи</a></li>
+                <li class="header__list-item"><a href="TAbl.html" class="nav-link">Турнирная таблица</a></li>
+                <li class="header__list-item"><a href="igroki.html" class="nav-link">Игроки</a></li>
+            </ul>
+            <a href="registration.html" class="header__button">Регистрация</a>
+        </nav>
+    </div>
+</header>
+
+<div class="main">
+  <div class="currentplaying">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="spotify">
+        <path fill="#34b171" d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 0 0 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM7 10.82C5.84 10.4 5 9.3 5 8V7h2v3.82zM19 8c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+    </svg>
+    <p class="heading">Турнирная таблица</p>
+  </div>
+  
+    <div class="loader">
+        <img class="albumcover" src="images/KRASNODAR.png">
+        <div class="song">
+            <p class="name">1. Краснодар</p>
+            <p class="artist">И: 21 • В: 14 • Н: 4 • П: 3 • ГЗ: 42 • ГП: 16 • О: 46</p>
+        </div>
+    </div>
+
+    <div class="loader">
+        <img class="albumcover" src="images/ZON 1.svg">
+        <div class="song">
+            <p class="name">2. Зенит</p>
+            <p class="artist">И: 21 • В: 13 • Н: 6 • П: 2 • ГЗ: 38 • ГП: 14 • О: 45</p>
+        </div>
+    </div>
+
+    <div class="loader">
+        <img class="albumcover" src="images/LOKOMOTIV.png">
+        <div class="song">
+            <p class="name">3. Локомотив</p>
+            <p class="artist">И: 21 • В: 11 • Н: 8 • П: 2 • ГЗ: 43 • ГП: 29 • О: 41</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/BALTIKA.png">
+        <div class="song">
+            <p class="name">4. Балтика</p>
+            <p class="artist">И: 21 • В: 10 • Н: 9 • П: 2 • ГЗ: 26 • ГП: 9 • О: 39</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/cska.png">
+        <div class="song">
+            <p class="name">5. ЦСКА</p>
+            <p class="artist">И: 21 • В: 11 • Н: 3 • П: 7 • ГЗ: 31 • ГП: 23 • О: 36</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/spartak.svg">
+        <div class="song">
+            <p class="name">6. Спартак</p>
+            <p class="artist">И: 21 • В: 10 • Н: 5 • П: 6 • ГЗ: 33 • ГП: 30 • О: 35</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/DINAMO MOSCOW.png">
+        <div class="song">
+            <p class="name">7. Динамо (Москва)</p>
+            <p class="artist">И: 21 • В: 8 • Н: 6 • П: 7 • ГЗ: 36 • ГП: 27 • О: 30</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/RUBIN.png">
+        <div class="song">
+            <p class="name">8. Рубин</p>
+            <p class="artist">И: 21 • В: 8 • Н: 5 • П: 8 • ГЗ: 22 • ГП: 25 • О: 29</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/AKHMAT.png">
+        <div class="song">
+            <p class="name">9. Ахмат</p>
+            <p class="artist">И: 21 • В: 7 • Н: 6 • П: 8 • ГЗ: 26 • ГП: 28 • О: 27</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/AKRON.png">
+        <div class="song">
+            <p class="name">10. Акрон</p>
+            <p class="artist">И: 21 • В: 5 • Н: 7 • П: 9 • ГЗ: 26 • ГП: 33 • О: 22</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/ROSTOV.png">
+        <div class="song">
+            <p class="name">11. Ростов</p>
+            <p class="artist">И: 21 • В: 5 • Н: 7 • П: 9 • ГЗ: 17 • ГП: 24 • О: 22</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/DINAMO MX.svg">
+        <div class="song">
+            <p class="name">12. Динамо МХ</p>
+            <p class="artist">И: 21 • В: 5 • Н: 6 • П: 10 • ГЗ: 11 • ГП: 24 • О: 21</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/PARI NN.png">
+        <div class="song">
+            <p class="name">13. Пари НН</p>
+            <p class="artist">И: 21 • В: 6 • Н: 2 • П: 13 • ГЗ: 18 • ГП: 31 • О: 20</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/KRYlya.png">
+        <div class="song">
+            <p class="name">14. Крылья Советов</p>
+            <p class="artist">И: 21 • В: 5 • Н: 5 • П: 11 • ГЗ: 22 • ГП: 40 • О: 20</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/Orenburg.svg">
+        <div class="song">
+            <p class="name">15. Оренбург</p>
+            <p class="artist">И: 21 • В: 4 • Н: 6 • П: 11 • ГЗ: 21 • ГП: 31 • О: 18</p>
+        </div>
+    </div>
+    
+    <div class="loader">
+        <img class="albumcover" src="images/SOCHI.png">
+        <div class="song">
+            <p class="name">16. СОЧИ</p>
+            <p class="artist">И: 21 • В: 2 • Н: 3 • П: 16 • ГЗ: 20 • ГП: 48 • О: 9</p>
+        </div>
+    </div>
+      <div class="down">
+<!-- From Uiverse.io by vinodjangid07 --> 
+<button class="Btn" onclick="window.location.href='https://github.com/highBobIK'">
+ <span class="svgContainer">
+   <svg fill="white" viewBox="0 0 496 512" height="1.6em"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+ </span>
+ <span class="BG"></span>
+</button>
+<button class="Btn">
+    <button class="Btn" onclick="window.location.href='https://t.me/Ah322Vpp'">
+  <span class="svgContainer">
+    <svg
+      viewBox="0 0 496 512"
+      height="1.6em"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="white"
+    >
+      <path
+        d="M248 8C111 8 0 119 0 256S111 504 248 504 496 393 496 256 385 8 248 8zM363 176.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7 .2-.7 .3-3.1-1.2-4.4s-3.6-.8-5.1-.5q-3.3 .7-104.6 69.1-14.8 10.2-26.9 9.9c-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3q.8-6.7 18.5-13.7 108.4-47.2 144.6-62.3c68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6 .5 9.6 2.9a10.5 10.5 0 0 1 3.5 6.7A43.8 43.8 0 0 1 363 176.7z"
+        fill="white"
+      ></path>
+    </svg>
+  </span>
+  <span class="BG"></span>
+</button>
+
+  </div>
+</div>
+
+</body>
+</html>

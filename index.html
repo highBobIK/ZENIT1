@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ФК Зенит</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/ZON 1.svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-blue: #00a0e3;
+            --text-black: #000000;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --border-color: #eaeaea;
+            --bg-light: #f5f7f9;
+            --win-green: #27ae60;
+            --loss-red: #e74c3c;
+            --text-main: #001a47; 
+            --text-muted: #6b7a90; 
+            --accent-blue: #009ae5;
+            --border-radius: 12px;
+            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        .parallax__title{
+            font-size: 120px;
+            font-weight: 900;
+            color: #009ae5; /* синий цвет */
+}
+        
+
+        /* =========================================
+           СТИЛИ ДЛЯ ШАПКИ (HEADER) ПОД ФОТО
+           ========================================= */
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+        
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px; /* Увеличено для соответствия пропорциям на макете */
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header__logo img {
+            height: 70px; /* Высота логотипа */
+            width: auto;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: 40px; /* Отступ между списком ссылок и кнопкой */
+        }
+
+        .header__list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main); /* Темно-синий цвет текста как на фото */
+            font-weight: 700;
+            font-size: 18px;
+            transition: color 0.3s; /* Плавный переход 0.3s */
+        }
+
+        .nav-link:hover {
+            color: black; /* Черный цвет при наведении */
+        }
+
+        /* Стили для кнопки регистрации */
+        .header__button {
+            background: var(--accent-blue);
+            border-radius: 0.5em;
+            box-shadow:
+            inset 0px -6px 18px -6px rgba(3, 15, 20, 0),
+            inset rgba(54, 69, 75, 1) -1px -1px 6px 0px,
+            inset 12px 0px 12px -6px rgba(3, 15, 20, 0),
+            inset -12px 0px 12px -6px rgba(3, 15, 20, 0),
+            rgba(54, 69, 75, 1) -1px -1px 6px 0px;
+            border: solid 2px #030f14;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0.7em 1.7em;
+            outline: none;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .header__button:hover {
+            box-shadow:
+            inset 0px -6px 18px -6px rgba(3, 15, 20, 1),
+            inset 0px 6px 18px -6px rgba(3, 15, 20, 1),
+            inset 12px 0px 12px -6px rgba(3, 15, 20, 0),
+            inset -12px 0px 12px -6px rgba(3, 15, 20, 0),
+            -1px -1px 6px 0px rgba(54, 69, 75, 1);
+        }
+        .header__button:active {
+            box-shadow:
+            inset 0px -12px 12px -6px rgba(3, 15, 20, 1),
+            inset 0px 12px 12px -6px rgba(3, 15, 20, 1),
+            inset 12px 0px 12px -6px rgba(3, 15, 20, 1),
+            inset -12px 0px 12px -6px rgba(3, 15, 20, 1),
+            -1px -1px 6px 0px rgba(54, 69, 75, 1);
+        }
+        .text {
+            color: #d0a756;
+            font-weight: 700;
+            margin: auto;
+            transition: all 0.3s;
+            width: fit-content;
+        }
+        .header__button:hover .text {
+            transform: scale(0.9);
+        }
+        .button:active .text {
+            transform: scale(0.8);
+        }
+
+        /* =========================================
+           ОСТАЛЬНЫЕ СТИЛИ (БЕЗ ИЗМЕНЕНИЙ)
+           ========================================= */
+       .breadcrumbs { font-size: 12px; color: #000000; margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .breadcrumbs span { margin: 0 5px; }
+        .news-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .card { 
+            background-color: var(--bg-light); 
+            border-radius: var(--border-radius); 
+            overflow: hidden; 
+            text-decoration: none; 
+            color: var(--text-black); 
+            display: flex; 
+            transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход 0.3s */
+        }
+        
+        .card:hover { 
+            background-color: var(--accent-blue); 
+            color: black; /* Черный цвет при наведении */
+        }
+        .main-news { flex-direction: column; width: 100%; }
+        .main-image { height: 0px; background: linear-gradient(135deg, #dce4ee 0%, #aab8c9 100%); position: relative; }
+        .main-content { padding: 24px; }
+        .main-title { font-size: 22px; font-weight: 700; margin: 0; }
+        .side-news-container { display: flex; flex-direction: column; gap: 20px; }
+        .side-news { flex-direction: row; flex: 1; }
+        .side-content { padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; }
+        .has-avatar { padding-top: 70px; justify-content: flex-end; }
+        .date { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; transition: color 0.3s ease; }
+        .side-title { font-size: 16px; font-weight: 700; margin: 0; line-height: 1.3; }
+        .side-image { width: 45%; background: linear-gradient(135deg, #c5d1e0 0%, #000000 100%); }
+        .bottom-side-image { width: 45%; background: #00a4e4; }
+        .matches-section { max-width: 1200px; margin: 60px auto 0; padding: 0 20px; }
+        .matches-main-title { text-align: center; font-size: 32px; font-weight: 900; color: var(--text-main); margin-bottom: 40px; }
+        .matches-grid { display: flex; gap: 20px; justify-content: space-between; }
+        .match-column { flex: 1; display: flex; flex-direction: column; }
+        .match-column-header { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--text-main); }
+        .match-card { border-radius: var(--border-radius); padding: 24px; display: flex; flex-direction: column; align-items: center; flex-grow: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.02); position: relative; }
+        .match-card-light { background-color: var(--bg-light); }
+        .match-card-dark { background-color: #03143c; color: #ffffff; }
+        .match-tournament-logo { font-size: 24px; margin-bottom: 10px; }
+        .match-tournament-name { font-size: 13px; font-weight: 800; margin-bottom: 6px; text-transform: uppercase; text-align: center; }
+        .match-location { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 5px; }
+        .match-card-dark .match-location { color: #8fa0b8; }
+        .match-badge { padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 24px; }
+        .match-badge-green { background-color: #1a9e3e; color: white; }
+        .match-badge-blue { background-color: var(--accent-blue); color: white; }
+        .match-badge-white { background-color: #ffffff; color: var(--text-main); }
+        .matchup { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 30px; }
+        .match-team { display: flex; flex-direction: column; align-items: center; width: 80px; }
+        .match-team-logo { width: 56px; height: 56px; border-radius: 50%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; }
+        .match-team-name { font-size: 13px; font-weight: 800; text-transform: uppercase; text-align: center; }
+        .match-score-board { text-align: center; }
+        .match-score { font-size: 32px; font-weight: 900; margin-bottom: 4px; line-height: 1; }
+        .match-date { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+        .match-card-dark .match-date { color: #8fa0b8; }
+        .match-btn { width: 100%; padding: 14px; border: none; border-radius: 8px; font-size: 13px; font-weight: 800; cursor: pointer; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 8px; transition: opacity 0.2s; }
+        .match-btn:hover { opacity: 0.9; }
+        .match-btn-white { background-color: #ffffff; color: var(--text-main); }
+        .match-btn-orange { background-color: #ff6b00; color: #ffffff; }
+        .match-btn-blue { background-color: var(--accent-blue); color: #ffffff; flex-grow: 1; }
+        .match-btn-calendar { background-color: var(--accent-blue); color: #ffffff; width: 45px; height: 45px; border-radius: 8px; border: none; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; }
+        .match-buttons-row { display: flex; width: 100%; gap: 10px; }
+    </style>
+</head>
+<body>
+
+<header class="header">
+        <div class="header__container">
+            <a href="#" class="header__logo">
+                <img src="images/logo2.svg" alt="Зенит">
+            </a>
+            
+            <nav class="header__nav">
+                <ul class="header__list">
+                    <li class="header__list-item"><a href="#" class="nav-link">Главная</a></li>
+                    <li class="header__list-item"><a href="raspisanie.html" class="nav-link">Матчи</a></li>
+                    <li class="header__list-item"><a href="TAbl.html" class="nav-link">Турнирная таблица</a></li>
+                    <li class="header__list-item"><a href="igroki.html" class="nav-link">Игроки</a></li>
+                </ul>
+            </nav>
+        
+
+            <div class="header__actions">
+                <a href="registration.html" class="header__button">Регистрация</a>
+            </div>
+
+        </div>
+    </header>
+    <!--------- Osmo [https://osmo.supply/] --------->
+<div class="parallax">
+  <section class="parallax__header">
+    <div class="parallax__visuals">
+      <div class="parallax__black-line-overflow"></div>
+      <div data-parallax-layers class="parallax__layers">
+        <div data-parallax-layer="3" class="parallax__layer-title">
+          <h2 class="parallax__title">Zenit</h2>
+        </div>
+      <div class="parallax__fade"></div>
+    </div>
+
+</div>
+</div>
+
+    <div class="news-container">
+        <div class="news-grid">
+            
+            <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%BE%D0%B7%D0%B0_%D0%B4%D0%B0_%D0%A1%D0%B8%D0%BB%D0%B2%D0%B0,_%D0%9B%D1%83%D0%B8%D1%81_%D0%AD%D0%BD%D1%80%D0%B8%D0%BA%D0%B5_%D0%90%D0%BD%D0%B4%D1%80%D0%B5" class="card main-news">
+                <div class="main-image"></div>
+                <img src="images/Luis Enrike 1.svg" alt="">
+                <div class="main-content">
+                    <h2 class="main-title">Победа в первом матче 2026-го!</h2>
+                </div>
+            </a>
+
+            <div class="side-news-container">
+                <a href="#" class="card side-news">
+                    <div class="side-content">
+                        <span class="date">03 марта, 22:05</span>
+                        <h2 class="side-title">Победа и выход в 1/2 финала Кубка FONBET!</h2>
+                    </div>
+                    <div class="side-image">
+                        <img src="images/win.jpg" alt="">
+                    </div>
+                </a>
+
+                <a href="#" class="card side-news">
+                    <div class="side-content has-avatar">
+                        <span class="date">27 февраля, 10:00</span>
+                        <h3 class="side-title">Сергею Семаку — 50!</h3>
+                    </div>
+                    <div class="side-image bottom-side-image"> 
+                        <img src="images/SEMAK.svg" alt="">
+                    </div>
+                </a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="matches-section">
+        <h2 class="matches-main-title">Матчи</h2>
+        
+        <div class="matches-grid">
+            
+            <div class="match-column">
+                <div class="match-column-header">Прошедший матч</div>
+                <div class="match-card match-card-light">
+                    <div class="match-tournament-logo">
+                        <img src="images/nhyo26m04tkvala23djg5fwgooi03etc 1.svg" alt="">
+                    </div>
+                    <div class="match-tournament-name" style="margin-top: 15px;">МИР РОССИЙСКАЯ ПРЕМЬЕР-ЛИГА</div>
+                    <div class="match-location">✈️ «Газпром Арена» · 21 тур </div>
+                    <div class="match-badge match-badge-green">Победа</div>
+                    
+                    <div class="matchup">
+                        <div class="match-team">
+                            <div class="match-team-logo">
+                                <img src="images/ZON 1.svg" alt="">
+                            </div>
+                            <div class="match-team-name">Зенит</div>
+                        </div>
+                        <div class="match-score-board">
+                            <div class="match-score">2:0</div>
+                            <div class="match-date">14 Марта</div>
+                        </div>
+                        <div class="match-team">
+                            <div class="match-team-logo">
+                                <img src="images/spartak.svg" alt="">
+                            </div>
+                            <div class="match-team-name">Спартак</div>
+                        </div>
+                    </div>
+                    
+                    <button class="match-btn match-btn-white"onclick="window.location.href='https://www.youtube.com/watch?v=9pTSsFmrlY0'">СМОТРЕТЬ ОБЗОР</button>
+                </div>
+            </div>
+
+            <div class="match-column">
+                <div class="match-column-header">Ближайшие матчи</div>
+                <div class="match-card match-card-dark">
+                    <div class="match-tournament-logo">
+                        <img src="images/fonbet.svg">
+                    </div>
+                    <div class="match-tournament-name">FONBET КУБОК РОССИИ</div>
+                    <div class="match-location">✈️ «Газпром Арена» · 1/2 финала Пути Регионов</div>
+                    <div class="match-badge match-badge-blue">Ближайший</div>
+                    
+                    <div class="matchup">
+                        <div class="match-team">
+                            <div class="match-team-logo">
+                                <img src="images/ZON 1.svg" alt="">
+                            </div>
+                            <div class="match-team-name">Зенит</div>
+                        </div>
+                        <div class="match-score-board">
+                            <div class="match-score">18:15</div>
+                            <div class="match-date">18 Марта, ср</div>
+                        </div>
+                        <div class="match-team">
+                            <div class="match-team-logo">
+                                <img src="images/DINAMO MX.svg">
+                            </div>
+                            <div class="match-team-name">Динамо МХ</div>
+                        </div>
+                    </div>
+
+                    
+                    <button class="match-btn match-btn-orange"onclick="window.location.href='https://tickets.fc-zenit.ru/football/tickets/?utm_source=site-fcz&utm_medium=news-fcz&utm_campaign=feed-fcz-dynamo-mh-kr-03-26'">ПРИХОДИ НА МАТЧ</button>
+                </div>
+            </div>
+
+            <div class="match-column">
+                <div class="match-column-header">Будущие матчи</div>
+                <div class="match-card match-card-light" style="padding-bottom: 0;">
+                    <div style="padding: 0 24px; display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div class="match-tournament-logo">
+                            <img src="images/nhyo26m04tkvala23djg5fwgooi03etc 1.svg" alt="">
+                        </div>
+                        <div class="match-tournament-name">МИР РОССИЙСКАЯ ПРЕМЬЕР-ЛИГА</div>
+                        <div class="match-location">🏠 «Газпром Арена» · 21 тур</div>
+                        <div class="match-badge match-badge-white">Будущий</div>
+                        
+                        <div class="matchup">
+                            <div class="match-team">
+                                <div class="match-team-logo">
+                                    <img src="images/DINAMO MOSCOW.png" alt="">
+                                </div>
+                                <div class="match-team-name">Динамо (МОСКВА)</div>
+                            </div>
+                            <div class="match-score-board">
+                                <div class="match-score">16:00</div>
+                                <div class="match-date">22 Марта, вс</div>
+                            </div>
+                            <div class="match-team">
+                                <div class="match-team-logo">
+                                    <img src="images//ZON 1.svg"> 
+                                </div>
+                                <div class="match-team-name">Зенит</div>
+                            </div>
+                        </div>
+                            <button class="match-btn match-btn-blue" onclick="window.location.href='https://tickets.fc-zenit.ru/football/tickets/?utm_source=site-fcz&utm_medium=tech_link&utm_campaign=header-tickets'">Купить билеты</button>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+<!-- From Uiverse.io by Praashoo7 --> 
+  <div class="down">
+<!-- From Uiverse.io by vinodjangid07 --> 
+<button class="Btn" onclick="window.location.href='https://github.com/highBobIK'">
+ <span class="svgContainer">
+   <svg fill="white" viewBox="0 0 496 512" height="1.6em"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+ </span>
+ <span class="BG"></span>
+</button>
+<button class="Btn">
+    <button class="Btn" onclick="window.location.href='https://t.me/Ah322Vpp'">
+  <span class="svgContainer">
+    <svg
+      viewBox="0 0 496 512"
+      height="1.6em"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="white"
+    >
+      <path
+        d="M248 8C111 8 0 119 0 256S111 504 248 504 496 393 496 256 385 8 248 8zM363 176.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7 .2-.7 .3-3.1-1.2-4.4s-3.6-.8-5.1-.5q-3.3 .7-104.6 69.1-14.8 10.2-26.9 9.9c-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3q.8-6.7 18.5-13.7 108.4-47.2 144.6-62.3c68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6 .5 9.6 2.9a10.5 10.5 0 0 1 3.5 6.7A43.8 43.8 0 0 1 363 176.7z"
+        fill="white"
+      ></path>
+    </svg>
+  </span>
+  <span class="BG"></span>
+</button>
+
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+
+</body>
+</html>
